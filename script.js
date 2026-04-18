@@ -2,24 +2,7 @@ const DISCORD_WEBHOOK = "https://discord.com/api/webhooks/1495076190908715153/wO
 const STORAGE_KEY = "comm_form_progress";
 
 document.addEventListener('DOMContentLoaded', () => {
-
-    // ============================================================
-    // 1. Hiệu ứng trái tim rơi
-    // ============================================================
-    const heartContainer = document.getElementById('heart-container');
-    const createHeart = () => {
-        if (!heartContainer) return;
-        const heart = document.createElement('div');
-        heart.classList.add('heart');
-        heart.innerHTML = '❤️';
-        heart.style.left = Math.random() * 100 + 'vw';
-        heart.style.animationDuration = Math.random() * 2 + 3 + 's';
-        heartContainer.appendChild(heart);
-        setTimeout(() => heart.remove(), 5000);
-    };
-    const heartInterval = setInterval(createHeart, 400);
-    setTimeout(() => clearInterval(heartInterval), 5000);
-
+    
     // ============================================================
     // 2. Toggle Brief Section (Câu 2)
     // ============================================================
