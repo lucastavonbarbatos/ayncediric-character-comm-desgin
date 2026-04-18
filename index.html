@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Cơm Design Nhà Tui <3</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="heart-container"></div>
+
+    <div class="main-container">
+        <header>
+            <div class="duck-icon">𓅰 𓅬 𓅭 𓅮 𓅯</div>
+            <h1 class="beating-heart">🍒 Order cơm here!🍒</h1>
+            <p class="status-warning">[Hiện đang nhận phản hồi]</p>
+        </header>
+
+        <section class="intro-section">
+            <h2>𓇼 ⋆.˚ 𓆝⋆.˚ 𓇼 Chào mừng mấy bồ đến với biểu mẫu đăng ký cơm design nhà tui !𓇼 ⋆.˚ 𓆝⋆.˚ 𓇼</h2>
+            <p>Sơ qua về cơm design nhà tui thì em nó có giá gốc là <strong>500k/des mặt trước</strong> và <strong>400k/des mặt sau</strong>. Giá trên đã bao gồm 1 mặt trước/mặt sau (hoặc 2 mặt) kèm theo 1 emote chibi color sketch.</p>
+            <p>Mấy bồ vui lòng điền các câu hỏi ở phía dưới để tui nắm rõ được yêu cầu của mọi người nhá !</p>
+
+        <form id="comm-form">
+            
+            <div class="form-group required">
+                <label>Câu 1. Đầu tiên, link MXH bồ dùng, như là Facebook, Threads, Instagram,.v.v.. (tui sẽ nhắn tin để xác nhận nè):</label>
+                <input type="url" name="mxh_link" placeholder="https://www.facebook.com/..." required>
+                <span class="error-message">Vui lòng điền link MXH của bồ nhen!</span>
+                <p class="note">SIÊU LƯU Ý: Trong trường hợp nếu mấy bồ muốn đặt nhiều hơn 1 commission design, mấy bồ có thể điền form lại lần nữa, hoặc trực tiếp nhắn cho tui bằng MXH mà mấy bồ đã điền link xác minh ở trên nha !</p>
+            </div>
+
+<div class="form-group required">
+    <label>Oge, dô việc. Bồ muốn đặt comm design 1 mặt hay 2 mặt? <span class="cute-tag"/span></label>
+    
+    <div class="sample-gallery">
+        <img src="2.png" alt="Sample 1">
+        <img src="1.png" alt="Sample 2">
+    </div>
+
+    <div class="radio-options">
+        <label class="radio-container">1 Mặt - Mặt trước (500k)
+            <input type="radio" name="comm_type" value="1_mat_truoc" required>
+            <span class="checkmark"></span>
+        </label>
+        <label class="radio-container">1 Mặt - Mặt sau (400k)
+            <input type="radio" name="comm_type" value="1_mat_sau">
+            <span class="checkmark"></span>
+        </label>
+        <label class="radio-container">2 Mặt - Trước và Sau (900k)
+            <input type="radio" name="comm_type" value="2_mat">
+            <span class="checkmark"></span>
+        </label>
+    </div>
+    <span class="error-message">Chọn giúp tui loại comm bồ muốn nha 𐔌՞꜆. ̫.꜀՞𐦯</span>
+</div>
+
+            <div class="form-group required">
+                <label>Câu 2. Để quá trình làm việc được trơn tru, bồ hãy trả lời các câu hỏi sau đây nhá !<br>
+                <span class="cute-tag">có thể bỏ qua nếu bồ đã chuẩn bị sẵn link drive/docs hoặc ảnh tổng hợp chất lượng cao (tải lên drive cho tui nhen)</span></label>
+                
+                <div class="super-note-box">
+                    <p><strong>SIÊU NOTE:</strong> Ở các câu hỏi cần viết và những câu hỏi cần ref ảnh, mấy bồ hãy điền tên FB trước (đối với câu trả lời) và đổi tên ảnh thành tên FB (đối với câu hỏi cần ảnh) nhé !</p>
+                    <p><em>Ví dụ: Dalziel Elmer: https://www.facebook.com/lamkhoi.phongthu#</em></p>
+                </div>
+
+                <div class="radio-options">
+                    <label class="radio-container">Tui sẽ điền câu trả lời !
+                        <input type="radio" name="fill_method" value="fill_detailed" required id="method-detailed">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="radio-container">Tui có sẵn link/ảnh rùi, tui sẽ nhảy đến câu hỏi thứ 3 nhá
+                        <input type="radio" name="fill_method" value="skip_to_3" id="method-skip">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+                <span class="error-message">Chọn cách bồ muốn điền thông tin nha!</span>
+            </div>
+
+            <div id="detailed-questions" class="conditional-section hidden">
+                <h3>⋆｡‧˚ʚ Câu hỏi thứ 2 ở đây ɞ˚‧｡⋆</h3>
+
+                <div class="form-group">
+                    <label>1. Ảnh của bé/nhân vật, rõ màu tóc và màu mắt (đừng để bị vỡ nét nha)</label>
+                    <div class="file-input-wrapper">
+                        <button type="button" class="btn-file">Chọn tệp (Max 100MB)</button>
+                        <input type="file" name="char_image" accept="image/*" class="file-input-hidden">
+                        <span class="file-name">Chưa chọn tệp nào</span>
+                    </div>
+                    <span class="error-message">Cái này bắt buộc nè bồ ơi!</span>
+                </div>
+
+                <div class="form-group">
+                    <label>2. Phong cách bồ muốn tui design?</label>
+                    <p class="note-small">(Ví dụ như lolita, steampunk, đời thường, lễ phục, v.v... Nếu có ảnh ref thì có thể tải lên nhé, nếu không có ảnh ref tui sẽ mặc định là bồ để tui tự do múa)</p>
+                    <textarea name="design_style" placeholder="Lolita/Steampunk/..." required></textarea>
+                    <span class="error-message">Gợi ý cho tui chút phong cách nhen!</span>
+
+                    <label class="sub-label">Ref trang phục (nếu có) !</label>
+                    <div class="file-input-wrapper">
+                        <button type="button" class="btn-file">Chọn tối đa 5 tệp (100MB/tệp)</button>
+                        <input type="file" name="outfit_ref" accept="image/*" multiple class="file-input-hidden">
+                        <span class="file-name">Chưa chọn tệp nào</span>
+                    </div>
+                </div>
+
+                <div class="form-group required">
+                    <label>3. Tone màu chủ đạo mà bồ muốn?</label>
+                    <p class="note-small">(hãy note thêm cho tui là bồ muốn giới hạn chỉ dùng những màu như này/ tránh dùng những màu như này/ ..v.v.. nếu có nha)</p>
+                    <textarea name="color_tone" placeholder="Ví dụ: Hồng phấn, trắng, tránh màu đen..." required></textarea>
+                    <span class="error-message">Màu sắc cũng quan trọng lắm nè!</span>
+
+                    <label class="sub-label">Nếu có ảnh bảng màu cụ thể thì có thể gửi tui nha !</label>
+                    <div class="file-input-wrapper">
+                        <button type="button" class="btn-file">Chọn tệp (Max 100MB)</button>
+                        <input type="file" name="palette_image" accept="image/*" class="file-input-hidden">
+                        <span class="file-name">Chưa chọn tệp nào</span>
+                    </div>
+                </div>
+
+                <div class="form-group required">
+                    <label>4. Signature của bé nhà/nhân vật mà bồ muốn tui thêm vào design?</label>
+                    <p class="note-small">(Ví dụ như hoa hồng, thánh giá, chu kỳ trăng, băng tuyết, v.v..)</p>
+                    <input type="text" name="char_signature" placeholder="Hoa hồng/Băng tuyết/..." required>
+                    <span class="error-message">Cho tui biết signature của bé nha!</span>
+                </div>
+
+                <div class="form-group">
+                    <label>5. Một vài điều lặt vặt khác bồ muốn cho tui biết về bé nhà/nhân vật? Hoặc các chi tiết nhỏ bồ muốn tui chú ý?</label>
+                    <p class="note-small">(Như là bé có nốt ruồi/tàn nhang/sẹo/tròng mắt hình gì đặc biệt/ .v.v.. hay hong, bé có vibe như nào, ...)</p>
+                    <textarea name="other_details" placeholder="Note ở đây nhen..."></textarea>
+                </div>
+            </div>
+
+            <div id="drive-link-section" class="form-group required conditional-section hidden">
+                <label>Câu 3. Dành cho những ai bỏ qua câu hỏi thứ 2 thì: Hãy ném cho tui link drive/docs brief của bồ ở đây !</label>
+                <input type="url" name="drive_brief_link" placeholder="https://drive.google.com/..." required>
+                <span class="error-message">Ném link drive của bồ vào đây nhen!</span>
+            </div>
+
+            <div class="form-group required">
+                <label>Câu 4. Bồ muốn design của bé nhà/nhân vật có độ detail như nào?</label>
+                <p class="note">Note: phụ phí áp dụng cho từng mặt riêng lẻ. Ví dụ đặt des 2 mặt, mặt trước phụ phí detail là 50k, thì phụ phí detail mặt sau cũng là 50k</p>
+                
+                <div class="radio-options detail-options">
+                    <label class="radio-container">0k: Giá gốc như nào thì bồ làm như thế là được nhen
+                        <input type="radio" name="detail_level" value="0k" required>
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="radio-container">100k: Tui chỉ muốn thêm nhiều chút thuii
+                        <input type="radio" name="detail_level" value="100k">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="radio-container">200k: Bồ thêm cho tui cái nì, cái kia, cái kìa, nữa điiii
+                        <input type="radio" name="detail_level" value="200k">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="radio-container">300k: Bồ múa thoải mái, tiền tui lo
+                        <input type="radio" name="detail_level" value="300k">
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="radio-container">400k: 400k là giới hạn của ạt tít, không phải giới hạn túi tiền của tui
+                        <input type="radio" name="detail_level" value="400k">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+                <span class="error-message">Chọn độ detail bồ muốn nha!</span>
+            </div>
+
+ <div class="form-group required">
+    <label>Câu 5. Deadline của 1 đơn design bên tui sẽ rơi vào tầm 1-3 tháng. Nhưng nếu bồ cần sớm hơn thì:</label>
+    
+    <div class="radio-options">
+        <label class="radio-container">Dưới 1 tháng: Phụ phí deadline là 200k
+            <input type="radio" name="deadline_opt" value="under_1_month" required>
+            <span class="checkmark"></span>
+        </label>
+        
+        <label class="radio-container">Dưới 1 tuần: Phụ phí deadline là 400k
+            <input type="radio" name="deadline_opt" value="under_1_week">
+            <span class="checkmark"></span>
+        </label>
+        
+        <label class="radio-container">Hong cần, cứ theo deadline của bồ nhá
+            <input type="radio" name="deadline_opt" value="normal">
+            <span class="checkmark"></span>
+        </label>
+        
+        <label class="radio-container" id="specific-date-label">Deadline ngày tháng cụ thể nếu có (điền ở dưới nà)
+            <input type="radio" name="deadline_opt" value="specific_date" id="date-check">
+            <span class="checkmark"></span>
+        </label>
+        
+        <div class="other-input hidden" id="date-input-container">
+            <label class="sub-label">Mục khác:</label>
+            <input type="date" name="specific_deadline_date">
+        </div>
+    </div>
+    <span class="error-message">Chọn một mốc deadline giúp tui nhen!</span>
+</div>
+            <div class="form-group required">
+                <label>Câu 6. Mọi design của tui đều sẽ được đăng công khai và lấy làm sample. Nhưng nếu bồ muốn riêng tư thì:</label>
+                <div class="radio-options">
+                    <label class="radio-container">Phí private: 15% tổng đơn
+                        <input type="radio" name="private_opt" value="private" required>
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="radio-container">Tui hong có nhu cầu private
+                        <input type="radio" name="private_opt" value="public">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+                <span class="error-message">Private hay không cũng nói tui biết nha!</span>
+            </div>
+
+            <div class="form-group required">
+                <label>Câu 7. Về vấn đề update cơm, nếu có tiến triển mới tui sẽ update trong vòng 2 đến 3 tuần, còn hong thì đừng dí tui nha *ăn không ngon ngủ không yên huhu* (trừ những đơn deadline gấp)</label>
+                <div class="radio-options">
+                    <label class="radio-container">Okila
+                        <input type="radio" name="update_agree" value="okila" required>
+                        <span class="checkmark"></span>
+                    </label>
+                    <label class="radio-container">Tui có tos của bản thân về vấn đề này, để tui nhắn bồ xem nha
+                        <input type="radio" name="update_agree" value="have_tos">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+                <span class="error-message">Đồng ý hoặc nhắn TOS của bồ cho tui nha!</span>
+            </div>
+
+            <div class="form-group required checkbox-group full-width-tos">
+                <label>Câu 8. Tos của tui để bồ tham khảo nè (đã bao gồm cả những điều trên)</label>
+                
+                <div class="tos-box">
+                    <ul>
+                        <li>Deadline cho 1 đơn là từ 1 đến 3 tháng. Nếu dưới hạn mức 1 tháng, bồ sẽ phải trả thêm phí deadline (200k). Trong trường hợp đặc biệt deadline dưới 1 tuần, phụ phí sẽ là 400k</li>
+                        <li>Chuyển khoản full sau khi chốt xong concept</li>
+                        <li>Tui không chấp nhận hủy đơn sau khi đã bắt đầu giai đoạn sketch. Nếu có bất kỳ lý do gì cực nghiêm trọng và thực sự không thể chi trả cho đơn thì có thể hủy, tuy nhiên vui lòng đền bù 40% tổng tiền đơn.</li>
+                        <li>Tui có quyền public tranh comm, nếu bạn muốn giữ comm riêng tư, vui lòng báo trước với tui. Phí private là 15% tổng đơn.</li>
+                        <li>Tổng tiền đơn có thể dao động 1 chút so với bảng giá gốc tùy thuộc vào lượng chi tiết của nhân vật bồ đặt. Về comm des, phụ phí detail sẽ dao động từ 50~400k.</li>
+                        <li>Nếu bồ đăng ký vào waitlist, hãy cho tui biết cụ thể thời gian bạn sẽ đặt và đến ngày đó tui sẽ nhắc nhở đến lượt. Trong trường hợp bồ không phản hồi tin nhắn của tui trong 24h tiếp theo, slot của bồ sẽ bị hủy.</li>
+                        <li>Quy trình update tiến độ comm của tui gồm: sketch - base - final.</li>
+                        <li>Lưu ý là khi lên line sẽ giống 100% sketch, vậy nên mấy bồ hãy duyệt sketch thật kỹ trước khi chốt nhé. Trong trường hợp sau khi base rồi, nhưng bồ vẫn muốn thêm detail thì cứ thoải mái nói với tui, tuy nhiên tùy vào lượng detail thêm thì sẽ bị tính thêm phí nha.</li>
+                        <li>Ngoài thời gian update, tui sẽ ít khi nhắn tin, trừ khi bản thân có thắc mắc hoặc mấy bồ nhắn.</li>
+                        <li>Mỗi đơn sẽ có 3 lần chỉnh sửa miễn phí, từ lần thứ 4 trở đi sẽ tính phí sửa là 20k.</li>
+                        <li>Tui không chỉnh sửa kiểu lắt nhắt mà là chỉnh sửa tổng thể, vậy nên mỗi khi tui gửi sketch, bồ nên nhận xét tổng thể trong 1 lần. Tương tự sau khi hết 3 lần chỉnh sửa miễn phí cũng vậy, mấy lỗi nhỏ như thêm 1 vài chi tiết lẻ, sẽ không bị tính là 1 lần sửa mới, nhưng nếu quá 5 lần như vậy thì sẽ tính là 1 lần sửa.</li>
+                        <li>Tui có thể vẽ: fictional character(s), Oc(s), người thật.</li>
+                        <li>Tui không thể vẽ: cơ bắp, người già, người trung niên, người máy (robot), nhân thú, những thứ khiến tui không thoải mái và những thứ ngoài khả năng của tui</li>
+                        <li>Tui là 1 artist chuyên vẽ nữ giới/những thứ mang thiên hướng nữ, trung tính. Những điều trên bao gồm: thiếu nữ, bé trai, bé gái, nam nhưng mang vẻ đẹp trung tính.</li>
+                        <li class="tos-bold">Khách của tui có thể bán lại design mua ở chỗ tui với điều kiện thấp hơn giá đơn đã giao dịch (ví dụ giá đơn là 700k, không được bán lại với giá trên 700k). Nếu tui phát hiện ra trường hợp nào, tui sẽ nhắc nhở lần 1 và lần 2 sẽ CBGD trên mọi hội nhóm.</li>
+                        <li>Deadline cho brief là 1 ngày. Sau 1 ngày mà mấy bồ chưa có brief thì slot của mấy bồ sẽ hủy. Mấy bồ lưu ý giùm tui nhá. Nếu có gì cần tư vấn thì có thể nhắn tui giúp nhen.</li>
+                        <li>Deadline chuyển khoản cũng là 1 ngày. Tương tự với brief, sau 1 ngày chưa chuyển khoản, slot của mấy bồ cũng sẽ bị hủy. Nếu mấy bồ có muốn dời thời hạn chuyển khoản thì có thể nhắc trước với tui. Tuy nhiên thì thời hạn delay không được quá 48 giờ.</li>
+                        <li>Nếu là đơn thương mại, giá sẽ được x3.</li>
+                    </ul>
+                    <div class="super-note-tos">
+                        <p><strong>SIÊU LƯU Ý:</strong> Nếu trong quá trình vẽ comm, mấy bồ có băn khoăn nào, hoặc thấy muốn thay đổi hay chỉnh sửa điểm nào, về tranh, màu, chi tiết chưa rõ, .v.v... thì xin hãy nói ra cho tui biết. Tui muốn kết quả cuối cùng phải là 1 thành quả mà cả 2 bên đều ưng ý.</p>
+                    </div>
+                </div>
+
+                <label class="checkbox-container">Tui đã đọc xong và đồng ý với TOS
+                    <input type="checkbox" name="tos_agree" required>
+                    <span class="checkmark"></span>
+                </label>
+                <span class="error-message">Đọc kỹ TOS và tích vào đây nha bồ!</span>
+            </div>
+
+            <div class="form-group info-only-group">
+                <label>Câu 9. Về ưu đãi của các đơn có mức giá cao:</label>
+                <p class="note">Đơn được tính theo khách, ví dụ bồ đặt 2 hay bao nhiêu des thì đều tính là 1 đơn.</p>
+                <p class="note">Tất cả những ưu đãi phía dưới , bồ có thể chọn oc/nhân vật để sử dụng, còn lại đều là random (biểu cảm sticker) hoặc gacha (sketch color)</p>
+                
+                <ul class="promo-list">
+                    <li>🎀 <strong>Đối với đơn trên 2.000.000đ:</strong> 02 doll của oc/nhân vật bồ đặt (sample xem ở dưới)</li>
+                    <li>🎀 <strong>Đối với đơn trên 3.000.000đ:</strong> 02 doll của oc/nhân vật bồ đặt, 04 sticker của oc/nhân vật bồ đặt (có thể chọn 1 hoặc nhiều oc/nhân vật hoặc tui random)</li>
+                    <li>🎀 <strong>Đối với đơn trên 5.000.000đ:</strong> 01 tờ sticker max 20 item (bao gồm tất cả oc/nhân vật bồ đặt + 1-2 vật phẩm signature), 01 sketch color 1 oc/nhân vật bồ đặt (concept gacha) (sample xem ở dưới)</li>
+                </ul>
+                <div class="info-note">(Phần này chỉ để bồ tham khảo ưu đãi thui nhen, tui sẽ tự tính dựa trên tổng đơn của bồ <3)</div>
+            </div>
+            <!-- ================================================================
+     SAMPLE GALLERY — Thêm đoạn này vào NGAY SAU thẻ đóng </div>
+     của .form-group câu 9 (info-only-group đầu tiên)
+     ================================================================ -->
+
+<div class="sample-section">
+
+    <div class="sample-block">
+        <div class="sample-images">
+            <img src="Sample_doll.webp" alt="Sample doll">
+            <!-- Nếu có nhiều ảnh thì thêm <img> tiếp vào đây -->
+        </div>
+        <p class="sample-caption">Sample doll</p>
+    </div>
+
+    <div class="sample-block">
+        <div class="sample-images">
+            <img src="Sample_emote.webp" alt="Sample sticker">
+        </div>
+        <p class="sample-caption">
+            Sample sticker<br>
+            <em>(Commission của Phú Viên Trần)</em>
+        </p>
+    </div>
+
+    <div class="sample-block">
+        <div class="sample-images">
+            <img src="Sample_sketch.webp" alt="Sample sketch color">
+        </div>
+        <p class="sample-caption">
+            Sample sketch color (concept gacha)<br>
+            <em>(Personal artwork - do not repost or use AI training)</em>
+        </p>
+    </div>
+
+</div>
+
+<div class="form-group required">
+    <label>Câu 10. Cuối cùng, cho tui xin phương thức gửi tranh nhen</label>
+    <div class="radio-options">
+        <label class="radio-container">Drive nhá
+            <input type="radio" name="send_method" value="drive" required id="drive-check">
+            <span class="checkmark"></span>
+        </label>
+        <div id="drive-note" class="note-small hidden">
+            tui sẽ xóa trên drive trong vòng 1 tháng, bồ nhớ tải về trước đó nhen
+        </div>
+
+        <label class="radio-container">Gmail
+            <input type="radio" name="send_method" value="gmail" id="gmail-check">
+            <span class="checkmark"></span>
+        </label>
+        <div class="other-input hidden" id="gmail-input-container">
+            <input type="email" name="customer_gmail" placeholder="Ném gmail của bồ ở đây lun nha...">
+            <p class="note-small">tui sẽ gửi file qua mail này cho bồ nhen</p>
+        </div>
+    </div>
+    <span class="error-message">Phương thức nhận tranh là gì nè?</span>
+            </div>
+
+            <div class="form-group required qr-section">
+                <label>Mã QR của tui <span class="cute-tag">(cho tui xin ảnh cap màn hình sau khi chuyển khoản nhen)</span></label>
+                
+                <div class="transfer-instructions">
+                    <p class="note">Note cách chuyển khoản (dành cho những ai không thạo):</p>
+                    <p>+ Đối với người có cả 2 thiết bị (laptop, điện thoại): bồ dùng 1 máy mở form, 1 máy vào tài khoản ngân hàng, quét mã để chuyển khoản nha</p>
+                    <p>+ Đối với người có 1 thiết bị (điện thoại): bồ có thể cap màn hình mã QR của tui và vào tài khoản ngân hàng để chuyển khoản nhé</p>
+                </div>
+
+                <img src="qr.png" alt="QR Thanh Toán" class="qr-code-img">
+
+                <label class="sub-label"><p style="color: var(--accent-pink); font-weight: 700;">0740116741444 · Hoang Thi Ngoc Diep · Mbbank</p>
+<p>Gửi ảnh cap màn hình chuyển khoản cho tui ở đây !</p></label>
+                <div class="file-input-wrapper">
+                    <button type="button" class="btn-file">Chọn tệp (Max 100MB)</button>
+                    <input type="file" name="transfer_proof" accept="image/*" class="file-input-hidden" required>
+                    <span class="file-name">Chưa chọn tệp nào</span>
+                </div>
+                <span class="error-message">Quên gửi ảnh bill chuyển khoản nè bồ!</span>
+            </div>
+
+            <div class="form-group info-only-group">
+                <div class="radio-options">
+                    <label>P/s 1: Form này của tui vẫn đang trong giai đoạn hoàn thiện, bồ có gì muốn góp ý cho tui hong?</label>
+                    <textarea name="feedback" placeholder="Góp ý tại đây nhen..."></textarea>
+                </div>
+                
+                <div class="radio-options last-ps">
+                    <label>P/s 2: Nếu có bất kỳ yêu cầu nào mà bồ thấy trên đây hong tiện hoặc có thắc mắc nào cần được giải đáp trực tiếp thì đừng ngại nhắn tui bất cứ lúc nào nhá !</label>
+                    <label class="radio-container">Okii, tui sẽ nhắn cho bồ
+                        <input type="radio" name="direct_message" value="agree">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn"> 𓅭 𓅰  NỘP CƠM Ở ĐÂY  𓅭 𓅰 </button>
+        </form>
+    </div>
+
+    <div id="success-screen" class="hidden">
+        <div class="success-content">
+            <div class="success-tick">
+                <svg viewBox="0 0 52 52">
+                    <circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/>
+                    <path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+                </svg>
+            </div>
+            <h2>ĂN CƠM THÀNH CÔNG !</h2>
+            <p>Yêu bồ nhiều <3 Tui sẽ check và nhắn tin xác nhận sớm nhất nhen !</p>
+            <p class="ducl-icon-large">⊹ ˗ˏˋ𓅭ˎˊ˗ ⊹ ࣪</p>
+ 
+        </div> <!-- đóng success-content -->
+    </div> <!-- đóng success-screen -->
+
+    <script src="script.js"></script>
+
+    <footer class="credit">
+        made with <img src="heart_icon.png" alt="♥" class="credit-heart"> by
+        <a href="https://www.facebook.com/lcs.vmei1105/?locale=vi_VN" target="_blank" rel="noopener">Lucasta</a>
+    </footer>
+
+</body>
+</html>
