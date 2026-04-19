@@ -238,6 +238,79 @@ document.addEventListener('DOMContentLoaded', () => {
     // ============================================================
     // 8. Gửi Discord — đầy đủ theo từng câu hỏi trong form
     // ============================================================
+    function calculateTotal(p) {
+    const BASE_PRICE = {
+        '1_mat_truoc': 600000,
+        '1_mat_sau':   500000,
+        '2_mat':       1100000,
+    };
+    const DETAIL_PRICE = {
+        '0k': 0, '100k': 100000, '200k': 200000,
+        '300k': 300000, '400k': 400000,
+    };
+
+    const fmt = (n) => n.toLocaleString('vi-VN') + ' ₫';
+
+    let lines = [];
+    let total = 0;
+
+    // Giá gốc
+    const base = BASE_PRICE[p.comm_type] || 0;
+    total += base;
+    const commLabel = {
+        '1_mat_truoc': '1 Mặt trước',
+        '1_mat_sau':   '1 Mặt sau',
+        '2_mat':       '2 Mặt',
+    }[p.comm_type] || p.comm_type;
+    lines.push(`Giá comm (${commLabel}): **${fmt(base)}**`);
+
+    // Detail
+    const detailFee = DETAIL_PRICE[p.detail_level] || 0;
+    if (detailFee > 0) {
+        const detailTotal = p.comm_type === '2_mat' ? detailFee * 2 : detailFee;
+        total += detailTotal;
+        const suffix = p.comm_type === '2_mat' ? ` × 2 mặt` : '';
+        lines.push(`Phụ phí detail (${p.detail_level}${suffix}): **+${fmt(detailTotal)}**`);
+    }
+
+    // Deadline
+    let deadlineFee = 0;
+    if (p.deadline_opt === 'under_1_week') {
+        deadlineFee = 400000;
+        lines.push(`Phụ phí deadline (dưới 1 tuần): **+${fmt(deadlineFee)}**`);
+    } else if (p.deadline_opt === 'under_1_month') {
+        deadlineFee = 200000;
+        lines.push(`Phụ phí deadline (dưới 1 tháng): **+${fmt(deadlineFee)}**`);
+    } else if (p.deadline_opt === 'specific_date' && p.specific_deadline_date) {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const target = new Date(p.specific_deadline_date);
+        target.setHours(0, 0, 0, 0);
+        const diffDays = Math.ceil((target - today) / (1000 * 60 * 60 * 24));
+        if (diffDays <= 7) {
+            deadlineFee = 400000;
+            lines.push(`Phụ phí deadline (còn ${diffDays} ngày, dưới 1 tuần): **+${fmt(deadlineFee)}**`);
+        } else if (diffDays <= 30) {
+            deadlineFee = 200000;
+            lines.push(`Phụ phí deadline (còn ${diffDays} ngày, dưới 1 tháng): **+${fmt(deadlineFee)}**`);
+        } else {
+            lines.push(`Deadline thường (còn ${diffDays} ngày): **+0 ₫**`);
+        }
+    }
+    total += deadlineFee;
+
+    // Private
+    if (p.private_opt === 'private') {
+        const privateFee = Math.round(total * 0.15);
+        total += privateFee;
+        lines.push(`Phí private (15%): **+${fmt(privateFee)}**`);
+    }
+
+    lines.push(`━━━━━━━━━━━━━━━`);
+    lines.push(`**TỔNG: ${fmt(total)}**`);
+
+    return lines.join('\n');
+}
     async function sendDiscord(p, files) {
         // Helper: trả về giá trị hoặc dấu gạch nếu trống
         const v = (val) => (val && val.trim && val.trim() !== '' && val !== '(Không điền)') ? val : '*(không điền)*';
@@ -288,6 +361,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 value: "** **",
                 inline: false
             },
+{
+    name: "💰 Tổng tiền tạm tính",
+    value: calculateTotal(p), 
+    inline: false
+},
+            {
+    name: "🏷️ Tên của khách",
+    value: v(p.customer_name),
+    inline: false
+},
             {
                 name: "📱 Câu 1 — Link MXH",
                 value: v(p.mxh_link),
@@ -507,5 +590,173 @@ body: JSON.stringify({
             submitBtn.textContent = '𓅭 𓅰  NỘP CƠM Ở ĐÂY  𓅭 𓅰';
         }
     });
+// ============================================================
+// TÍNH GIÁ TỰ ĐỘNG
+// Thêm đoạn này vào CUỐI hàm DOMContentLoaded trong script.js
+// (ngay trước dấu }); cuối cùng)
+// ============================================================
 
+// --- Giá gốc ---
+const BASE_PRICE = {
+    '1_mat_truoc': 600000,
+    '1_mat_sau':   500000,
+    '2_mat':       1100000,
+};
+
+// --- Phụ phí detail (theo từng mặt) ---
+const DETAIL_PRICE = {
+    '0k':   0,
+    '100k': 100000,
+    '200k': 200000,
+    '300k': 300000,
+    '400k': 400000,
+};
+
+// --- Format tiền VNĐ ---
+function formatVND(amount) {
+    return amount.toLocaleString('vi-VN');
+}
+
+// --- Tạo box hiển thị giá ---
+function createPriceBox() {
+    const existing = document.getElementById('price-summary');
+    if (existing) return existing;
+
+    const box = document.createElement('div');
+    box.id = 'price-summary';
+    box.innerHTML = `
+        <div class="price-title">🧾 Tổng tiền tạm tính</div>
+        <div class="price-rows" id="price-rows"></div>
+        <div class="price-total-row">
+            <span>Tổng cần chuyển khoản:</span>
+            <span id="price-total">—</span>
+        </div>
+        <div class="price-note">* Đây là giá tạm tính. Tui sẽ xác nhận lại tổng cuối cùng sau khi nhận brief nhen!</div>
+    `;
+
+    // Chèn vào trước nút submit
+    const submitBtn = document.querySelector('.submit-btn');
+    submitBtn.parentNode.insertBefore(box, submitBtn);
+    return box;
+}
+
+// --- Tính và cập nhật giá ---
+function updatePrice() {
+    const commType    = document.querySelector('input[name="comm_type"]:checked')?.value;
+    const detailLevel = document.querySelector('input[name="detail_level"]:checked')?.value;
+    const deadlineOpt = document.querySelector('input[name="deadline_opt"]:checked')?.value;
+    const privateOpt  = document.querySelector('input[name="private_opt"]:checked')?.value;
+    const specificDate = document.querySelector('input[name="specific_deadline_date"]')?.value;
+
+    // Chưa chọn comm type → ẩn box
+    const box = document.getElementById('price-summary');
+    if (!commType) {
+        if (box) box.style.display = 'none';
+        return;
+    }
+
+    createPriceBox();
+    document.getElementById('price-summary').style.display = 'block';
+
+    const rows = [];
+    let total = 0;
+
+    // 1. Giá comm gốc
+    const basePrice = BASE_PRICE[commType] || 0;
+    total += basePrice;
+    const commLabel = {
+        '1_mat_truoc': '1 Mặt trước',
+        '1_mat_sau':   '1 Mặt sau',
+        '2_mat':       '2 Mặt (trước + sau)',
+    }[commType];
+    rows.push({ label: `Giá comm (${commLabel})`, value: basePrice });
+
+    // 2. Phụ phí detail
+    if (detailLevel && detailLevel !== '0k') {
+        const detailPrice = DETAIL_PRICE[detailLevel] || 0;
+        // Nếu 2 mặt thì nhân đôi
+        const detailTotal = commType === '2_mat' ? detailPrice * 2 : detailPrice;
+        if (detailTotal > 0) {
+            total += detailTotal;
+            const label = commType === '2_mat'
+                ? `Phụ phí detail ${detailLevel} × 2 mặt`
+                : `Phụ phí detail ${detailLevel}`;
+            rows.push({ label, value: detailTotal });
+        }
+    }
+
+    // 3. Phụ phí deadline
+    let deadlineFee = 0;
+    let deadlineLabel = '';
+
+    if (deadlineOpt === 'under_1_week') {
+        deadlineFee = 400000;
+        deadlineLabel = 'Phụ phí deadline dưới 1 tuần';
+    } else if (deadlineOpt === 'under_1_month') {
+        deadlineFee = 200000;
+        deadlineLabel = 'Phụ phí deadline dưới 1 tháng';
+    } else if (deadlineOpt === 'specific_date' && specificDate) {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const target = new Date(specificDate);
+        target.setHours(0, 0, 0, 0);
+        const diffDays = Math.ceil((target - today) / (1000 * 60 * 60 * 24));
+
+        if (diffDays <= 0) {
+            deadlineFee = 400000;
+            deadlineLabel = `Phụ phí deadline (ngày đã qua hoặc hôm nay)`;
+        } else if (diffDays <= 7) {
+            deadlineFee = 400000;
+            deadlineLabel = `Phụ phí deadline dưới 1 tuần (còn ${diffDays} ngày)`;
+        } else if (diffDays <= 30) {
+            deadlineFee = 200000;
+            deadlineLabel = `Phụ phí deadline dưới 1 tháng (còn ${diffDays} ngày)`;
+        } else {
+            deadlineLabel = `Deadline thường (còn ${diffDays} ngày)`;
+        }
+    }
+
+    if (deadlineFee > 0) {
+        total += deadlineFee;
+        rows.push({ label: deadlineLabel, value: deadlineFee });
+    } else if (deadlineLabel) {
+        rows.push({ label: deadlineLabel, value: 0, isFree: true });
+    }
+
+    // 4. Phụ phí private (15% tổng đến giờ)
+    if (privateOpt === 'private') {
+        const privateFee = Math.round(total * 0.15);
+        total += privateFee;
+        rows.push({ label: 'Phí private (15% tổng đơn)', value: privateFee });
+    }
+
+    // --- Render rows ---
+    const rowsEl = document.getElementById('price-rows');
+    rowsEl.innerHTML = rows.map(r => `
+        <div class="price-row">
+            <span class="price-row-label">${r.label}</span>
+            <span class="price-row-value ${r.isFree ? 'price-free' : ''}">
+                ${r.isFree ? 'Miễn phí' : '+' + formatVND(r.value)}
+            </span>
+        </div>
+    `).join('');
+
+    document.getElementById('price-total').textContent = formatVND(total) + ' VNĐ';
+}
+
+// --- Lắng nghe thay đổi để cập nhật giá ---
+['comm_type', 'detail_level', 'deadline_opt', 'private_opt'].forEach(name => {
+    document.querySelectorAll(`input[name="${name}"]`).forEach(input => {
+        input.addEventListener('change', updatePrice);
+    });
+});
+
+// Lắng nghe thêm input ngày cụ thể
+document.querySelector('input[name="specific_deadline_date"]')
+    ?.addEventListener('change', updatePrice);
+document.querySelector('input[name="specific_deadline_date"]')
+    ?.addEventListener('input', updatePrice);
+
+// Chạy lần đầu (để restore progress hiện giá đúng)
+updatePrice();
 });

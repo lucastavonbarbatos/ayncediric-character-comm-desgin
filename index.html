@@ -28,8 +28,13 @@
                 <input type="url" name="mxh_link" placeholder="https://www.facebook.com/..." required>
                 <span class="error-message">Vui lòng điền link MXH của bồ nhen!</span>
                 <p class="note">SIÊU LƯU Ý: Trong trường hợp nếu mấy bồ muốn đặt nhiều hơn 1 commission design, mấy bồ có thể điền form lại lần nữa, hoặc trực tiếp nhắn cho tui bằng MXH mà mấy bồ đã điền link xác minh ở trên nha !</p>
+                 <p class="note">⚠️ Hãy đảm bảo link MXH của bồ có thể nhắn tin được nhen!</p>
             </div>
-
+<div class="form-group required">
+    <label>Tui có thể gọi bồ là gì nè?</label>
+    <input type="text" name="customer_name" placeholder="Tên hoặc biệt danh của bồ..." required>
+    <span class="error-message">Cho tui biết tên bồ với nhen!</span>
+</div>
 <div class="form-group required">
     <label>Oge, dô việc. Bồ muốn đặt comm design 1 mặt hay 2 mặt? <span class="cute-tag"/span></label>
     
@@ -231,7 +236,7 @@
                         <li>Deadline cho 1 đơn là từ 1 đến 3 tháng. Nếu dưới hạn mức 1 tháng, bồ sẽ phải trả thêm phí deadline (200k). Trong trường hợp đặc biệt deadline dưới 1 tuần, phụ phí sẽ là 400k</li>
                         <li>Chuyển khoản full sau khi chốt xong concept</li>
                         <li>Tui không chấp nhận hủy đơn sau khi đã bắt đầu giai đoạn sketch. Nếu có bất kỳ lý do gì cực nghiêm trọng và thực sự không thể chi trả cho đơn thì có thể hủy, tuy nhiên vui lòng đền bù 40% tổng tiền đơn.</li>
-                        <li>Tui có quyền public tranh comm, nếu bạn muốn giữ comm riêng tư, vui lòng báo trước với tui. Phí private là 15% tổng đơn.</li>
+                        <li>Tui có quyền public tranh comm, nếu bồ muốn giữ comm riêng tư, vui lòng báo trước với tui. Phí private là 15% tổng đơn.</li>
                         <li>Tổng tiền đơn có thể dao động 1 chút so với bảng giá gốc tùy thuộc vào lượng chi tiết của nhân vật bồ đặt. Về comm des, phụ phí detail sẽ dao động từ 50~400k.</li>
                         <li>Nếu bồ đăng ký vào waitlist, hãy cho tui biết cụ thể thời gian bạn sẽ đặt và đến ngày đó tui sẽ nhắc nhở đến lượt. Trong trường hợp bồ không phản hồi tin nhắn của tui trong 24h tiếp theo, slot của bồ sẽ bị hủy.</li>
                         <li>Quy trình update tiến độ comm của tui gồm: sketch - base - final.</li>
@@ -347,13 +352,16 @@
                     <button type="button" class="btn-file">Chọn tệp (Max 100MB)</button>
                     <input type="file" name="transfer_proof" accept="image/*" class="file-input-hidden" required>
                     <span class="file-name">Chưa chọn tệp nào</span>
+                    <p class="note" style="color: var(--red-warning); border-left-color: var(--red-warning);">
+Bồ phải gửi ảnh chuyển khoản thì đơn mới xác nhận được nhé! Số tiền tổng tạm tính bồ có thể xem bên dưới 👇
+</p>
                 </div>
                 <span class="error-message">Quên gửi ảnh bill chuyển khoản nè bồ!</span>
             </div>
 
             <div class="form-group info-only-group">
                 <div class="radio-options">
-                    <label>P/s 1: Form này của tui vẫn đang trong giai đoạn hoàn thiện, bồ có gì muốn góp ý cho tui hong?</label>
+                    <label>P/s 1: Bồ có đóng góp gì cho form không?</label>
                     <textarea name="feedback" placeholder="Góp ý tại đây nhen..."></textarea>
                 </div>
                 

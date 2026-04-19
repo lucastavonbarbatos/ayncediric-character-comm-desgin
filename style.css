@@ -927,3 +927,103 @@ textarea {
     opacity: 0.85;
     text-decoration: underline;
 }
+/* ============================================================
+   BẢNG TÍNH GIÁ TỰ ĐỘNG
+   Thêm vào CUỐI file style.css
+   ============================================================ */
+
+#price-summary {
+    display: none;
+    margin-top: 36px;
+    margin-bottom: 8px;
+    border: 2px solid var(--accent-pink);
+    border-radius: 16px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #FFF8FA, #FFFAFC);
+    box-shadow: 0 4px 16px rgba(255, 141, 161, 0.15);
+}
+
+.price-title {
+    background: linear-gradient(135deg, var(--accent-pink), var(--deep-pink));
+    color: white;
+    font-weight: 700;
+    font-size: 1rem;
+    padding: 12px 20px;
+    letter-spacing: 0.3px;
+}
+
+.price-rows {
+    padding: 14px 20px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    padding-bottom: 8px;
+    border-bottom: 1px dashed #F5D5DC;
+}
+
+.price-row:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.price-row-label {
+    flex: 1;
+    padding-right: 12px;
+    font-weight: 500;
+}
+
+.price-row-value {
+    font-weight: 700;
+    color: var(--accent-pink);
+    white-space: nowrap;
+}
+
+.price-free {
+    color: #8BC34A;
+}
+
+.price-total-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 20px;
+    background: linear-gradient(135deg, #FFF0F5, #FFF5F8);
+    border-top: 2px solid var(--main-pink);
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: var(--text-color);
+}
+
+#price-total {
+    color: var(--deep-pink);
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.price-note {
+    padding: 10px 20px;
+    font-size: 0.8rem;
+    color: var(--text-light);
+    font-style: italic;
+    border-top: 1px solid #F5D5DC;
+    background: #FFFAFC;
+}
+
+@media (max-width: 480px) {
+    .price-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2px;
+    }
+    .price-row-value {
+        align-self: flex-end;
+    }
+}
