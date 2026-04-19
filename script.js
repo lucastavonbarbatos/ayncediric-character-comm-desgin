@@ -244,9 +244,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // --- Label loại comm ---
         const commMap = {
-            '1_mat_truoc': '1 Mặt — Mặt trước (500k)',
-            '1_mat_sau':   '1 Mặt — Mặt sau (400k)',
-            '2_mat':       '2 Mặt — Trước và Sau (900k)',
+            '1_mat_truoc': '1 Mặt — Mặt trước (600k)',
+            '1_mat_sau':   '1 Mặt — Mặt sau (500k)',
+            '2_mat':       '2 Mặt — Trước và Sau (1tr1)',
         };
 
         // --- Label deadline ---
@@ -259,11 +259,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // --- Label detail ---
         const detailMap = {
-            '0k':   '0k — Giá gốc là được nhen',
-            '100k': '100k — Thêm nhiều chút thui',
-            '200k': '200k — Thêm cái này, cái kia, cái kìa',
-            '300k': '300k — Múa thoải mái, tiền tui lo',
-            '400k': '400k — Giới hạn của artist, không phải túi tiền',
+            '0k':   '0k — Giá gốc là được nhen cô chủ',
+            '100k': '100k — Thêm nhiều chút thui cô chủ ạ',
+            '200k': '200k — Thêm cái này, cái kia, cái kìa cho khách nựaa',
+            '300k': '300k — Múa thoải mái, tiền khách lo',
+            '400k': '400k — Giới hạn của cô chủ, không phải túi tiền của khách',
         };
 
         // --- Cách điền brief ---
@@ -273,13 +273,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // --- Câu 7 update ---
         const updateLabel = p.update_agree === 'okila'
-            ? 'Okila 👍'
-            : `Có TOS riêng — sẽ nhắn riêng`;
+            ? 'Khách đã Okila với TOS của cô chủ ᓚ₍⑅^..^₎♡'
+            : `Có TOS riêng — khách sẽ nhắn riêng với cô chủ`;
 
         // --- Câu 10 nhận tranh ---
         const sendLabel = p.send_method === 'gmail'
             ? `Gmail: **${v(p.customer_gmail)}**`
-            : 'Drive (tui sẽ xóa sau 1 tháng)';
+            : 'Drive (cô chủ sẽ xóa sau 1 tháng)';
 
         // Xây dựng fields
         const fields = [
@@ -368,7 +368,7 @@ document.addEventListener('DOMContentLoaded', () => {
             },
             {
                 name: "✅ Câu 8 — Đồng ý TOS",
-                value: p.tos_agree ? 'Đã đọc và đồng ý ✅' : 'Chưa đồng ý ❌',
+                value: p.tos_agree ? 'Đã đọc và chỉ có đồng ý ✅' : 'Chưa đồng ý ❌',
                 inline: true
             },
             {
@@ -391,13 +391,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (p.direct_message === 'agree') {
             fields.push({
                 name: "💌 P/s 2 — Nhắn trực tiếp",
-                value: 'Khách sẽ nhắn trực tiếp cho bồ nhen!',
+                value: 'Khách sẽ nhắn trực tiếp cho cô chủ nhen!',
                 inline: false
             });
         }
 
         const embed = {
-            title: "🍒 Có đơn comm mới!",
+            title: "🍒 Cô chủ có đơn cơm mới!",
             color: 0xFF8DA1,
             fields: fields,
             footer: { text: `🕐 Nộp lúc: ${p.submitted_at}` },
@@ -407,10 +407,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const embedRes = await fetch(DISCORD_WEBHOOK, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-                content: "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
-                embeds: [embed]
-            })
+body: JSON.stringify({
+    content: "<@680804392340946950> quack quack quack quack!!! 𓅭  𓅰  𓅭  𓅰\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━",
+    embeds: [embed]
+})
         });
         if (!embedRes.ok) throw new Error("Discord embed lỗi: " + await embedRes.text());
 
